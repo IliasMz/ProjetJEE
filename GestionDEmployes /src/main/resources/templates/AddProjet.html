@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="template" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter Projet</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+<div class="p-3">
+    <h1>Ajouter Projet</h1>
+    <form method="post" th:action="@{/enregistrerProjet}">
+        <div class="form-group">
+            <label for="description">Description projet:</label>
+            <input type="text" id="description" class="form-control" th:field="${projet.description}" placeholder="Description du projet">
+        </div>
+        <div class="form-group">
+            <label for="debutProj">Debut projet:</label>
+            <input type="text" id="debutProj" class="form-control" th:field="${projet.debutProj}" placeholder="Debut du projet">
+        </div>
+        <div class="form-group">
+            <label for="finProj">Fin projet:</label>
+            <input type="text" id="finProj" class="form-control" th:field="${projet.finProj}" placeholder="Fin du projet">
+        </div>
+        <!-- Ajoutez les champs restants selon vos besoins -->
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</div>
+</body>
+</html>

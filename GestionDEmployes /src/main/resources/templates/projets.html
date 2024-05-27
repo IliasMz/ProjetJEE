@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Projets</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body class="container">
+<div class="p-3">
+    <div class="card">
+        <div class="card-header">Liste des Projets</div>
+        <form method="get" th:action="@{/projets}">
+            <input type="text" name="search" th:value="${keyword}">
+            <button class="btn btn-primary" type="submit">Rechercher</button>
+        </form>
+        <div class="card-body">
+            <table class="table align-middle">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="projet : ${projets}">
+                    <td th:text="${projet.id}"></td>
+                    <td th:text="${projet.description}"></td>
+                    <td th:text="${projet.debutProj}"></td>
+                    <td th:text="${projet.finProj}"></td>
+                    <td>
+                        <a class="btn btn-primary"
+                           th:href="@{editprojet(page=${currentPage}, size=${size}, search=${searchName}, id=${projet.id})}"> Edit </a>
+                    </td>
+
+
+                    <td>
+                        <a class="btn btn-danger"
+                           th:href="@{/delete(page=${currentPage}, size=${size}, search=${searchName}, id=${projet.id})}"> Delete </a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+            <div class="container">
+                <ul class="nav nav-pills">
+                    <li class="nav-item me-2" th:each="p : ${pages}">
+                        <a th:text="${p + 1}" th:class="${p == currentPage ? 'btn btn-primary' : 'btn btn-outline-primary'}"
+                           th:href="@{/projets(page=${p}, size=${size}, search=${searchName})}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

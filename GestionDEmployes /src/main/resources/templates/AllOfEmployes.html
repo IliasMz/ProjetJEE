@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xml:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Employés</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .pagination-btn {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body class="container">
+<div layout:fragment="content">
+    <div class="card">
+        <div class="card-header">Liste des Employés</div>
+        <form method="get" th:action="@{/employees}">
+            <input type="text" name="search" th:value="${searchName}" placeholder="Rechercher par nom...">
+            <button class="btn btn-primary" type="submit">Rechercher</button>
+        </form>
+        <div class="card-body">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Matricule</th>
+                    <th>Département</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee : ${employees}">
+                    <td th:text="${employee.id}"></td>
+                    <td th:text="${employee.nom}"></td>
+                    <td th:text="${employee.matricule}"></td>
+                    <td th:text="${employee.departement.nom}"></td>
+                    <td> <a class="btn btn-primary" th:href="@{edit(id=${employee.id})}"
+                           th:text="Edit">
+
+                        </a>
+                    </td>
+                    <td> <a class="btn btn-danger" th:href="@{/delete/{id}(id=${employee.id})}" th:text="Delete"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <ul class="nav nav-pills">
+                    <li class="nav-item me-2" th:each="p : ${pages}">
+                        <a th:text="${p + 1}" th:class="${p == currentPage ? 'btn btn-primary pagination-btn' : 'btn btn-outline-primary pagination-btn'}"
+                           th:href="@{/employees(page=${p}, size=${size}, search=${searchName})}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

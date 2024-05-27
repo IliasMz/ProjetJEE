@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Département</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+<div class="p-3">
+    <h1>Modifier Département</h1>
+    <form method="post" th:action="@{/departements/save}">
+        <input type="hidden" name="id" th:value="${departement.id}">
+        <div class="mb-3">
+            <label>Nom :</label>
+            <input type="text" class="form-control" name="nom" th:value="${departement.nom}">
+        </div>
+        <div class="mb-3">
+            <label>Budget :</label>
+            <input type="text" class="form-control" name="budget" th:value="${departement.budget}">
+        </div>
+        <!-- Ajoutez les champs restants selon vos besoins -->
+        <button type="submit" class="btn btn-primary">Modifier</button>
+    </form>
+</div>
+</body>
+</html>

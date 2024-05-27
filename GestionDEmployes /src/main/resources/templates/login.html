@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f8f9fa;
+    }
+    .login-form {
+      width: 100%;
+      max-width: 400px;
+      padding: 15px;
+      margin: auto;
+    }
+    .login-form .form-control {
+      border-radius: 1.25rem;
+    }
+    .login-form .btn-primary {
+      border-radius: 1.25rem;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .login-form .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+    .form-check-label {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="login-form">
+  <h1 class="text-center">Login</h1>
+  <p th:if="${param.error}" class="alert alert-danger">Wrong email or password</p>
+  <form th:action="@{/login}" method="post">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" name="username" class="form-control" placeholder="Enter your email" autofocus="autofocus" required />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required />
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
+      <label class="form-check-label" for="showPassword">Show Password</label>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block">Log in</button>
+    </div>
+    <div class="form-group text-center">
+      <a href="/register">Register</a>
+    </div>
+  </form>
+</div>
+<script>
+  function togglePassword() {
+    var passwordField = document.getElementById("password");
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+    } else {
+      passwordField.type = "password";
+    }
+  }
+</script>
+</body>
+</html>
